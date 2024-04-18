@@ -1,10 +1,13 @@
 package com.example.sudoku.controller;
 
+import com.example.sudoku.view.alert.AlertBox;
+import com.example.sudoku.view.alert.AlertBoxRules;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 public class GameController {
@@ -21,6 +24,14 @@ public class GameController {
     private Button buttonHandlerVerify;
     @FXML
     private ImageView imageHelp;
+
+    @FXML
+    void onMouseClickedImageHelp(MouseEvent event) {
+        showHelpAlert();
+
+    }
+    private AlertBox alertBox = new AlertBox();
+    private AlertBoxRules alertBoxRules = new AlertBoxRules();
 
     @FXML
     public void initialize() {
@@ -42,5 +53,14 @@ public class GameController {
                 gridPaneBoard.add(textField, col, row); // Add to GridPane with correct indexing
             }
         }
+    }
+    private void showHelpAlert() {
+        alertBoxRules.showMessage(
+                "Reglas",
+                "Reglas del juego",
+                "Las reglas del sudoku son simples. Cada celda necesita tener un número del 1 al 9. Observa las celdas resaltadas en la cuadrícula." +
+                        "\nTodos estos grupos necesitan tener los números del 1 al 9 sin repetir (cada número puede ser utilizado sólo una vez en cada columna, en cada línea y cada cuadrícula de 3x3). De esta forma, las secciones que se cruzan son el límite y la forma de resolver el sudoku.." +
+                        "\n\nDiviertete!!"
+        );
     }
 }

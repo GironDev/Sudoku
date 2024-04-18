@@ -88,7 +88,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
-            <ImageView fx:id="imageHelp" fitHeight="50.0" fitWidth="29.0" layoutX="374.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imageHelp" fitHeight="50.0" fitWidth="29.0" layoutX="374.0" layoutY="1.0" onMouseClicked="#onMouseClickedImageHelp" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/helpIcon.png" />
                </image>
