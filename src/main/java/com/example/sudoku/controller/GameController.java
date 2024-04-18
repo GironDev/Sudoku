@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 public class GameController {
@@ -18,6 +19,8 @@ public class GameController {
 
     @FXML
     private Button buttonHandlerVerify;
+    @FXML
+    private ImageView imageHelp;
 
     @FXML
     public void initialize() {
