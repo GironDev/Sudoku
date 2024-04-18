@@ -2,6 +2,7 @@ package com.example.sudoku.controller;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
@@ -9,6 +10,14 @@ public class GameController {
 
     @FXML
     private GridPane gridPaneBoard;
+    @FXML
+    private Button buttonHandlerReset;
+
+    @FXML
+    private Button buttonHandlerResolve;
+
+    @FXML
+    private Button buttonHandlerVerify;
 
     @FXML
     public void initialize() {
