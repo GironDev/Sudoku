@@ -10,6 +10,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class GameController {
 
     @FXML
@@ -33,9 +37,15 @@ public class GameController {
     private AlertBox alertBox = new AlertBox();
     private AlertBoxRules alertBoxRules = new AlertBoxRules();
 
+    private int[][] sudokuGrid; // Matriz para almacenar los números del Sudoku (sin resolver)
+    private int[][] gridNumbers; // Matriz para almacenar los números predeterminados por cuadrícula
+    private Random random = new Random(); // Generador de números aleatorios
+
     @FXML
     public void initialize() {
         // Create 9x9 grid of TextFields
+        sudokuGrid = new int[9][9];
+        gridNumbers = new int[3][3];
 
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
@@ -54,6 +64,7 @@ public class GameController {
             }
         }
     }
+
     private void showHelpAlert() {
         alertBoxRules.showMessage(
                 "Reglas",
