@@ -105,12 +105,31 @@ public class GameController {
         textField.setOnKeyTyped(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                System.out.println(textField.getText());
 
+
+
+                System.out.println(textField.getText());
                 String number = String.valueOf(textField.getText());
-                int numberText = Integer.parseInt(number);
-                System.out.println(number);
-                sudoku.setNumberInSudokuGrid(numberText, row, col);
+                if (!number.equalsIgnoreCase("")){
+
+                    int numberText = Integer.parseInt(number);
+                    System.out.println(number);
+
+                if (!sudoku.isNumberHorizontal(numberText, row)){
+                    if (!sudoku.isNumberVertical(numberText, col)){
+                        sudoku.setNumberInSudokuGrid(numberText, row, col);
+                        textField.setStyle("-fx-text-inner-color: #4fa773;");
+                    }else {
+                        textField.setStyle("-fx-text-inner-color: red;");
+                    }
+                }else {
+                    textField.setStyle("-fx-text-inner-color: red;");
+                }
+                }else {
+                    sudoku.setNumberInSudokuGrid(0, row, col);
+                    textField.setStyle("-fx-text-inner-color: #4fa773;");
+                }
+
             }
         });
 //
