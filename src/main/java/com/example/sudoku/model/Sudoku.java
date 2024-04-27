@@ -19,17 +19,17 @@ public class Sudoku implements ISudoku {
     }
 
     // Solución Sudoku
-    // this.sudokuGrid = new int [][]{
-    // {3, 1, 9, 4, 7, 2, 5, 6, 8},
-    // {4, 5, 2, 6, 3, 8, 1, 9, 7,},
-    // {7, 8, 6, 9, 5, 1, 3, 4, 2},
-    // {5, 4, 3, 8, 1, 7, 9, 2, 6},
-    // {1, 9, 8, 2, 6, 5, 4, 7, 3},
-    // {6, 2 ,7 ,3 ,9, 4 ,8, 5, 1},
-    // {9 ,7 ,4 ,1, 2 ,3 ,6 ,8 ,5},
-    // {2 ,6 ,1 ,5, 8 ,9, 7, 3, 0},
-    // {8 ,3, 5, 7, 4 ,6 ,2, 1, 9}};
-    // };
+//     this.sudokuGrid = new int [][]{
+//     {3, 1, 9, 4, 7, 2, 5, 6, 8},
+//     {4, 5, 2, 6, 3, 8, 1, 9, 7,},
+//     {7, 8, 6, 9, 5, 1, 3, 4, 2},
+//     {5, 4, 3, 8, 1, 7, 9, 2, 6},
+//     {1, 9, 8, 2, 6, 5, 4, 7, 3},
+//     {6, 2 ,7 ,3 ,9, 4 ,8, 5, 1},
+//     {9 ,7 ,4 ,1, 2 ,3 ,6 ,8 ,5},
+//     {2 ,6 ,1 ,5, 8 ,9, 7, 3, 0},
+//     {8 ,3, 5, 7, 4 ,6 ,2, 1, 9}};
+//     };
 
     /**
      * @param number
@@ -199,7 +199,7 @@ public class Sudoku implements ISudoku {
         return sudokuGrid;
     }
 
-    public void setSudokuGrid(int[][] tableSudoku) {
+    public void setSudokuGrid(int[][] sudokuGrid) {
         this.sudokuGrid = sudokuGrid;
     }
 
@@ -249,5 +249,24 @@ public class Sudoku implements ISudoku {
         // System.out.println("Victoria Legal Legalisima!?");
         return true;
     }
+
+    public void getSolution(){
+        // Solución Sudoku
+     int solution[][] = new int [][]{
+     {3, 1, 9, 4, 7, 2, 5, 6, 8},
+     {4, 5, 2, 6, 3, 8, 1, 9, 7,},
+     {7, 8, 6, 9, 5, 1, 3, 4, 2},
+     {5, 4, 3, 8, 1, 7, 9, 2, 6},
+     {1, 9, 8, 2, 6, 5, 4, 7, 3},
+     {6, 2 ,7 ,3 ,9, 4 ,8, 5, 1},
+     {9 ,7 ,4 ,1, 2 ,3 ,6 ,8 ,5},
+     {2 ,6 ,1 ,5, 8 ,9, 7, 3, 4},
+     {8 ,3, 5, 7, 4 ,6 ,2, 1, 9}
+     };
+
+     setSudokuGrid(solution);
+
+     }
+
 
 }

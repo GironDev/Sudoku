@@ -105,6 +105,41 @@ public class GameController {
         GameView.getInstance();
     }
 
+    @FXML
+    void onHandleResolve(ActionEvent event) throws IOException {
+        buttonHandlerResolve.setDisable(true);
+        buttonHandlerVerify.setDisable(true);
+        System.out.println(event);
+        sudoku.getSolution();
+        showSolutionInfo();
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                TextField textField = new TextField();
+                textField.setMaxWidth(54); // Set preferred width for each cell
+                textField.setMaxHeight(42); // Set preferred height for each cell
+                String emptyCell = String.valueOf(sudoku.getSudokuGrid()[row][col]);
+//                System.out.println(emptyCell);
+                if (!emptyCell.equalsIgnoreCase("0")) {
+                    textField.setText(emptyCell);
+                    textField.setEditable(false);
+                    textField.setBackground(new Background(new BackgroundFill(Color.rgb(220, 165, 103), null, null)));
+//                    System.out.println(emptyCell);
+                    textField.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+                } else {
+                    textField.setFont(Font.font("Verdana", FontWeight.LIGHT, 20));
+                }
+
+                // Add event listener for input validation (optional)
+                textField.setAlignment(Pos.CENTER);
+                gridPaneBoard.add(textField, col, row); // Add to GridPane with correct indexing
+//                updateGrid(textField, row, col);
+            }
+        }
+
+
+
+    }
+
     private void updateGrid(TextField textField, int row, int col) {
         textField.setOnKeyTyped(new EventHandler<KeyEvent>() {
             @Override
@@ -172,7 +207,8 @@ public class GameController {
         alertBoxRules.showMessage(
                 "¡Excelente!",
                 "¡Excelente!",
-                "Has completado tu sudoku satisfactoriamente."
+                "Has completado tu sudoku satisfactoriamente." +
+                "\nAún así, tuviste " + attempts + " errores durante éste intento. ¡Sigue Mejorando!"
         );
         GameView.deleteInstance();
         GameView.getInstance();
@@ -182,7 +218,18 @@ public class GameController {
         alertBox.showMessage(
                 "¡Fallo!",
                 "Fallo",
-                "Una celda tiene un valor erroneo, revísalo para ganar!"
+                "Una celda tiene un valor erróneo o está vacía, revísala para ganar!"
         );
     }
+
+    private void showSolutionInfo() throws IOException {
+        alertBox.showMessage(
+                "¿Te rendiste?",
+                "La solución ha sido revelada",
+                "Tras haber revelado la solución, sólo podrás reiniciar el juego " +
+                        "\ny volverlo a intentar. ¡Buena suerte la próxima vez!"
+        );
+    }
+
+
 }

@@ -45,7 +45,7 @@
                         <Font name="Comic Sans MS" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="buttonHandlerResolve" layoutX="166.0" layoutY="118.0" mnemonicParsing="false" text="Resolver">
+                  <Button fx:id="buttonHandlerResolve" layoutX="166.0" layoutY="118.0" mnemonicParsing="false" onAction="#onHandleResolve" text="Resolver">
                      <font>
                         <Font name="Comic Sans MS" size="18.0" />
                      </font>
