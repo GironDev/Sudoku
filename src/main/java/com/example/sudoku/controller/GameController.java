@@ -1,6 +1,7 @@
 package com.example.sudoku.controller;
 
 import com.example.sudoku.model.Sudoku;
+import com.example.sudoku.view.GameView;
 import com.example.sudoku.view.alert.AlertBox;
 import com.example.sudoku.view.alert.AlertBoxRules;
 import javafx.collections.ObservableList;
@@ -98,6 +99,12 @@ public class GameController {
         getVerifyGrid();
     }
 
+    @FXML
+    void onHandlerReset(ActionEvent event) throws  IOException {
+        GameView.deleteInstance();
+        GameView.getInstance();
+    }
+
     private void updateGrid(TextField textField, int row, int col) {
         textField.setOnKeyTyped(new EventHandler<KeyEvent>() {
             @Override
@@ -137,15 +144,15 @@ public class GameController {
         });
     }
 
-    public void getVerifyGrid() {
+    public void getVerifyGrid() throws IOException {
         int[][] finalGrid = sudoku.getSudokuGrid();
         boolean result = sudoku.isValidSudoku(finalGrid);
 
         if (result == true) {
             System.out.println("Errores: " + attempts);
-            showHelpAlert();
+            showVictoryMessage();
         } else {
-            System.out.println("Una celda tiene un valor erroneo, revísalo para ganar!");
+            showVerifyBad();
         }
 
     }
@@ -159,5 +166,23 @@ public class GameController {
                         "\nTodos estos grupos necesitan tener los números del 1 al 9 sin repetir (cada número puede ser utilizado sólo una vez en cada columna, en cada línea y cada cuadrícula de 3x3). De esta forma, las secciones que se cruzan son el límite y la forma de resolver el sudoku.."
                         +
                         "\n\nDiviertete!!");
+    }
+
+    private void showVictoryMessage() throws IOException {
+        alertBoxRules.showMessage(
+                "¡Excelente!",
+                "¡Excelente!",
+                "Has completado tu sudoku satisfactoriamente."
+        );
+        GameView.deleteInstance();
+        GameView.getInstance();
+    }
+
+    private void showVerifyBad() throws IOException {
+        alertBox.showMessage(
+                "¡Fallo!",
+                "Fallo",
+                "Una celda tiene un valor erroneo, revísalo para ganar!"
+        );
     }
 }
