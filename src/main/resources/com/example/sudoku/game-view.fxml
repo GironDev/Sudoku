@@ -54,7 +54,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="buttonHandlerReset" layoutX="178.0" layoutY="88.0" mnemonicParsing="false" text="Reiniciar" textOverrun="CLIP" />
+                  <Button fx:id="buttonHandlerReset" layoutX="178.0" layoutY="88.0" mnemonicParsing="false" onAction="#onHandlerReset" text="Reiniciar" textOverrun="CLIP" />
                </children>
             </AnchorPane>
          </children></VBox>
