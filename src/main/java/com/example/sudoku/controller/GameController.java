@@ -15,9 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -83,8 +81,51 @@ public class GameController {
                     textField.setBackground(new Background(new BackgroundFill(Color.rgb(207, 226, 227), null, null)));
                     // System.out.println(emptyCell);
                     textField.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+                    if (col == 2 || col == 5){
+                        BorderStroke borderStroke = new BorderStroke(
+                                Color.GRAY,                    // Color del borde
+                                BorderStrokeStyle.SOLID,       // Estilo del borde (sólido)
+                                null,                          // Radio de esquina (null para esquinas rectas)
+                                new BorderWidths(0, 3, 0, 0)  // Ancho del borde (0 en los otros lados excepto el derecho)
+                        );
+
+                        textField.setBorder(new Border(borderStroke));
+                    }
+
                 } else {
                     textField.setFont(Font.font("Verdana", FontWeight.LIGHT, 20));
+                    if (col == 2 || col == 5){
+                        BorderStroke borderStroke = new BorderStroke(
+                                Color.GRAY,                    // Color del borde
+                                BorderStrokeStyle.SOLID,       // Estilo del borde (sólido)
+                                null,                          // Radio de esquina (null para esquinas rectas)
+                                new BorderWidths(0, 3, 0, 0)  // Ancho del borde (0 en los otros lados excepto el derecho)
+                        );
+
+                        textField.setBorder(new Border(borderStroke));
+                    }
+
+                }
+
+                if (row == 2 || row == 5){
+                    BorderStroke borderStyle = new BorderStroke(
+                            Color.GRAY,                    // Color del borde
+                            BorderStrokeStyle.SOLID,       // Estilo del borde (sólido)
+                            null,                          // Radio de esquina (null para esquinas rectas)
+                            new BorderWidths(0, 0, 3, 0)  // Ancho del borde (0 en los otros lados excepto el derecho)
+                    );
+
+                    textField.setBorder(new Border(borderStyle));
+                    if (col == 2 || col ==5){
+                        BorderStroke alternativeBorder = new BorderStroke(
+                                Color.GRAY,                    // Color del borde
+                                BorderStrokeStyle.SOLID,       // Estilo del borde (sólido)
+                                null,                          // Radio de esquina (null para esquinas rectas)
+                                new BorderWidths(0, 3, 3, 0)  // Ancho del borde (0 en los otros lados excepto el derecho)
+                        );
+
+                        textField.setBorder(new Border(alternativeBorder));
+                    }
                 }
 
                 // Add event listener for input validation (optional)
@@ -162,6 +203,16 @@ public class GameController {
                     textField.setEditable(false);
                     textField.setBackground(new Background(new BackgroundFill(Color.rgb(220, 165, 103), null, null)));
                     // System.out.println(emptyCell);
+                    if (col == 2 || col == 5){
+                        BorderStroke borderStroke = new BorderStroke(
+                                Color.GRAY,                    // Color del borde
+                                BorderStrokeStyle.SOLID,       // Estilo del borde (sólido)
+                                null,                          // Radio de esquina (null para esquinas rectas)
+                                new BorderWidths(0, 3, 0, 0)  // Ancho del borde (0 en los otros lados excepto el derecho)
+                        );
+
+                        textField.setBorder(new Border(borderStroke));
+                    }
                     textField.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
                 } else {
                     textField.setFont(Font.font("Verdana", FontWeight.LIGHT, 20));
@@ -171,7 +222,30 @@ public class GameController {
                 textField.setAlignment(Pos.CENTER);
                 gridPaneBoard.add(textField, col, row); // Add to GridPane with correct indexing
                 // updateGrid(textField, row, col);
+
+                if (row == 2 || row == 5){
+                    BorderStroke borderStyle = new BorderStroke(
+                            Color.GRAY,                    // Color del borde
+                            BorderStrokeStyle.SOLID,       // Estilo del borde (sólido)
+                            null,                          // Radio de esquina (null para esquinas rectas)
+                            new BorderWidths(0, 0, 3, 0)  // Ancho del borde (0 en los otros lados excepto el derecho)
+                    );
+
+                    textField.setBorder(new Border(borderStyle));
+                    if (col == 2 || col ==5){
+                        BorderStroke alternativeBorder = new BorderStroke(
+                                Color.GRAY,                    // Color del borde
+                                BorderStrokeStyle.SOLID,       // Estilo del borde (sólido)
+                                null,                          // Radio de esquina (null para esquinas rectas)
+                                new BorderWidths(0, 3, 3, 0)  // Ancho del borde (0 en los otros lados excepto el derecho)
+                        );
+
+                        textField.setBorder(new Border(alternativeBorder));
+                    }
+                }
             }
+
+
         }
 
     }
