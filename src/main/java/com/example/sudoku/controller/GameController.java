@@ -50,20 +50,17 @@ public class GameController {
     private AlertBox alertBox = new AlertBox();
     private AlertBoxRules alertBoxRules = new AlertBoxRules();
 
-    private int[][] sudokuGrid; // Matriz para almacenar los números del Sudoku (sin resolver)
-    private int[][] oldSudokuGrid;
-    private int[][] newSudokuGrid;
-    private int[][] gridNumbers; // Matriz para almacenar los números predeterminados por cuadrícula
+
+    private int attempts = 0;
 
     private Sudoku sudoku;
-    // private Random random = new Random(); // Generador de números aleatorios
+
 
     @FXML
     public void initialize() {
-        // Create 9x9 grid of TextFields
+
         sudoku = new Sudoku();
-        sudokuGrid = new int[9][9];
-        gridNumbers = new int[3][3];
+
 
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
@@ -75,7 +72,7 @@ public class GameController {
                     textField.setText(emptyCell);
                     textField.setEditable(false);
                     textField.setBackground(new Background(new BackgroundFill(Color.rgb(207, 226, 227), null, null)));
-                    System.out.println(emptyCell);
+//                    System.out.println(emptyCell);
                     textField.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
                 } else {
                     textField.setFont(Font.font("Verdana", FontWeight.LIGHT, 20));
@@ -96,76 +93,61 @@ public class GameController {
     }
 
     @FXML
-    void onHandlerVerify(ActionEvent event) throws IOException{
-//        updateGrid();
-        getVerifyGrid(sudoku);
+    void onHandlerVerify(ActionEvent event) throws IOException {
+        // updateGrid();
+        getVerifyGrid();
     }
 
-    private void updateGrid(TextField textField, int row, int col){
+    private void updateGrid(TextField textField, int row, int col) {
         textField.setOnKeyTyped(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
 
-
-
-                System.out.println(textField.getText());
+//                System.out.println(textField.getText());
                 String number = String.valueOf(textField.getText());
-                if (!number.equalsIgnoreCase("")){
-
+                if (!number.equalsIgnoreCase("")) {
                     int numberText = Integer.parseInt(number);
-                    System.out.println(number);
+//                    System.out.println(number);
 
-                if (!sudoku.isNumberHorizontal(numberText, row)){
-                    if (!sudoku.isNumberVertical(numberText, col)){
-                        sudoku.setNumberInSudokuGrid(numberText, row, col);
-                        textField.setStyle("-fx-text-inner-color: #4fa773;");
-                    }else {
+                    if (!sudoku.isNumberHorizontal(numberText, row)) {
+                        if (!sudoku.isNumberVertical(numberText, col)) {
+                            int[][] subGridVerify = sudoku.getSudokuGrid();
+                            if (!sudoku.isNumberInGroupCell(subGridVerify, numberText, row, col)){
+//                                System.out.println("Entró");
+                                sudoku.setNumberInSudokuGrid(numberText, row, col);
+                                textField.setStyle("-fx-text-inner-color: #4fa773;");
+                            }else {
+                                attempts += 1;
+                                textField.setStyle("-fx-text-inner-color: red;");
+                            }
+                        } else {
+                            attempts += 1;
+                            textField.setStyle("-fx-text-inner-color: red;");
+                        }
+                    } else {
+                        attempts += 1;
                         textField.setStyle("-fx-text-inner-color: red;");
                     }
-                }else {
-                    textField.setStyle("-fx-text-inner-color: red;");
-                }
-                }else {
+                } else {
                     sudoku.setNumberInSudokuGrid(0, row, col);
                     textField.setStyle("-fx-text-inner-color: #4fa773;");
                 }
 
             }
         });
-//
-////        System.out.println(gridPaneBoard.getChildren());
-//        ObservableList<Node> childs = gridPaneBoard.getChildren();
-//        oldSudokuGrid = sudoku.getSudokuGrid();
-//        for (int i = 0; i < gridPaneBoard.getChildren().size(); i++) {
-//            TextField testTxt = (TextField) childs.get(i);
-//            if (testTxt.getText().equalsIgnoreCase("")){
-//
-//            }else {
-//                sudoku.setNumberInSudokuGrid();
-//            }
-//            System.out.println(gridPaneBoard.getChildren().get(i));
-//            System.out.println(testTxt.getText());;
-//        }
-//        for (int i = 0; i < 9; i++) {
-//            for (int j = 0; j < 9; j++) {
-////                gridPaneBoard.getChildren().get()
-//            }
-//
-//        }
-
     }
 
-    public void getVerifyGrid(Sudoku sudoku){
-        sudokuGrid = sudoku.getSudokuGrid();
-//        this.sudoku = sudoku;
-        for (int i = 0; i < sudokuGrid.length; i++) {
-            for (int j = 0; j < sudokuGrid[i].length; j++) {
-                System.out.print(sudokuGrid[i][j] + " ");
-            }
-            System.out.println(); // Agrega un salto de línea al final de cada fila
+    public void getVerifyGrid() {
+        int[][] finalGrid = sudoku.getSudokuGrid();
+        boolean result = sudoku.isValidSudoku(finalGrid);
+
+        if (result == true) {
+            System.out.println("Errores: " + attempts);
+            showHelpAlert();
+        } else {
+            System.out.println("Una celda tiene un valor erroneo, revísalo para ganar!");
         }
-        int test[][] = sudoku.getSudokuGrid();
-        System.out.println(String.valueOf(test));
+
     }
 
     private void showHelpAlert() {
